@@ -25,31 +25,33 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(!started)
+        if(started)
         {
-            if (Input.GetMouseButtonDown(0))
+            if (!Physics.Raycast(transform.position, Vector3.down, 1f))
             {
-                _rigidbody.velocity = new Vector3(_ballSpeed, 0, 0);
-                started = true;
+                gameOver = true;
+                _rigidbody.velocity = new Vector3(0, -25f, 0f);
+                Camera.main.GetComponent<SmoothCameraFollow>()._gameOver = true;
 
-                GameManager.Instance.StartGame();
+                GameManager.Instance.GameOver();
+            }
 
+            if (Input.GetMouseButtonDown(0) && !gameOver)
+            {
+                SwitchDirections();
+                _spawner.ChangePlatformColor();
             }
         }
+    }
 
-        if(!Physics.Raycast(transform.position, Vector3.down, 1f))
+    public void StartGameButton()
+    {
+        if (!started)
         {
-            gameOver = true;
-            _rigidbody.velocity = new Vector3(0, -25f, 0f);
-            Camera.main.GetComponent<SmoothCameraFollow>()._gameOver = true;
+            _rigidbody.velocity = new Vector3(_ballSpeed, 0, 0);
+            started = true;
 
-            GameManager.Instance.GameOver();
-        }
-
-        if (Input.GetMouseButtonDown(0) && !gameOver)
-        {
-            SwitchDirections();
-            _spawner.ChangePlatformColor();
+            GameManager.Instance.StartGame();
         }
     }
 
