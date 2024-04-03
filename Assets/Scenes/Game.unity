@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 00:11
+  m_Text: 
 --- !u!222 &21900247
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1627,6 +1627,7 @@ MonoBehaviour:
   _particle: {fileID: 7864679520982955794, guid: 0b31491a06f910244bd145b08a9a91e3, type: 3}
   _colletiblesEffect: {fileID: 8300000, guid: 15851acdd8b1fef44a5042bda8fe7756, type: 3}
   _scoreManager: {fileID: 1028701495}
+  _spawner: {fileID: 1472763851}
 --- !u!1 &1378154808
 GameObject:
   m_ObjectHideFlags: 0
@@ -1772,8 +1773,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e67df14b1f3324449256f01a90f51ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _startingPlatform: {fileID: 128294672}
   _platformPrefab: {fileID: 8622829723636005279, guid: c3bd5cef960e677459ba85ef92cb6d9a, type: 3}
   _collectible: {fileID: 1769988962638482928, guid: 6382af886a8a44d42b7962ae15fdae26, type: 3}
+  _colors:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0, b: 0, a: 1}
+  - {r: 0, g: 0.26666668, b: 1, a: 1}
+  - {r: 0, g: 1, b: 0.4509804, a: 1}
 --- !u!1 &1558027155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2908,7 +2915,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Platform
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8158951947474547141, guid: c3bd5cef960e677459ba85ef92cb6d9a, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

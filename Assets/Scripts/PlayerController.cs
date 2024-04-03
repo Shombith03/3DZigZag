@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     bool gameOver = false;
     [SerializeField]
     private ScoreManager _scoreManager;
+    [SerializeField]
+    private PlatformSpawner _spawner;
 
     private void Awake()
     {
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
                 started = true;
 
                 GameManager.Instance.StartGame();
+
             }
         }
 
@@ -46,6 +49,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && !gameOver)
         {
             SwitchDirections();
+            _spawner.ChangePlatformColor();
         }
     }
 

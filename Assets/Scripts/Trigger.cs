@@ -15,6 +15,7 @@ public class Trigger : MonoBehaviour
     private void DestroyPlatforms()
     {
         Rigidbody rb = GetComponentInParent<Rigidbody>();
+        GameObject.Find("PlatformSpawner").gameObject.GetComponent<PlatformSpawner>().RemovePlatformFromList(rb.gameObject);
         rb.useGravity = true;
         rb.isKinematic = false;
         Destroy(transform.parent.gameObject, 1f);

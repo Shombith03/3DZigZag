@@ -6,6 +6,8 @@ using UnityEngine;
 public class PlatformSpawner : MonoBehaviour
 {
     [SerializeField]
+    private GameObject _startingPlatform;
+    [SerializeField]
     private GameObject _platformPrefab;
     [SerializeField]
     private GameObject _collectible;
@@ -14,6 +16,10 @@ public class PlatformSpawner : MonoBehaviour
     private float _size;
 
     internal bool _gameOver;
+
+    [SerializeField]
+    private Color[] _colors;
+    private List<GameObject> _platforms = new List<GameObject>();
 
     private void Start()
     {
@@ -54,13 +60,31 @@ public class PlatformSpawner : MonoBehaviour
         }
     }
 
+    public void ChangePlatformColor()
+    {
+        if(_colors.Length > 0 && _platforms.Count > 0)
+        {
+            Color randomColor = _colors[UnityEngine.Random.Range(0, _colors.Length)];
+
+            foreach (GameObject item in _platforms)
+            {
+                Renderer platformRenderer = item.GetComponent<MeshRenderer>();
+                if(platformRenderer != null )
+                {
+                    platformRenderer.material.color = randomColor;
+                }
+            }
+            _startingPlatform.GetComponent<MeshRenderer>().material.color = randomColor;
+        }
+    }
+
     private void SpawnAtX()
     {
         Vector3 pos = _lastPos;
         pos.x += _size;
         _lastPos = pos;
-        Instantiate(_platformPrefab, pos, Quaternion.identity);
-
+        GameObject platform = Instantiate(_platformPrefab, pos, Quaternion.identity);
+        AddPlatformToList(platform);
         SpawnDiamonds(pos);
     }
 
@@ -69,10 +93,21 @@ public class PlatformSpawner : MonoBehaviour
         Vector3 pos = _lastPos;
         pos.z += _size;
         _lastPos = pos;
-        Instantiate(_platformPrefab, pos, Quaternion.identity);
+        GameObject platform = Instantiate(_platformPrefab, pos, Quaternion.identity);
+        AddPlatformToList(platform);
 
         SpawnDiamonds(pos);
 
+    }
+
+    private void AddPlatformToList(GameObject platform)
+    {
+        _platforms.Add(platform);
+    }
+
+    internal void RemovePlatformFromList(GameObject platform)
+    {
+        _platforms.Remove(platform);
     }
 
     private void SpawnDiamonds(Vector3 pos)
