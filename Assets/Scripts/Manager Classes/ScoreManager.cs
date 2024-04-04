@@ -34,8 +34,9 @@ public class ScoreManager : MonoBehaviour
     {
         //CancelInvoke(nameof(IncrementScore));
         PlayerPrefs.SetInt("Score", _scoreValue);
+        GameManager.Instance.StoreScore(_scoreValue);
 
-        if(PlayerPrefs.HasKey("HighScore"))
+        if (PlayerPrefs.HasKey("HighScore"))
         {
             if(PlayerPrefs.GetInt("HighScore") < _scoreValue)
             {

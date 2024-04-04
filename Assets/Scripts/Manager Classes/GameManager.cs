@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     private ScoreManager _scoreManager;
     [SerializeField]
     private PlatformSpawner _platformSpawner;
+    [SerializeField]
+    private CurrencyManager _currencyManager;
 
     internal bool gameOver;
 
@@ -25,8 +27,6 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         _uIManager.StartGame();
-        //_scoreManager.StartScore();
-        // start timer
         _platformSpawner.StartSpawningPlatforms();
     }
 
@@ -35,5 +35,10 @@ public class GameManager : MonoBehaviour
         _uIManager.GameOver();
         _scoreManager.StopScore();
         gameOver = true;
+    }
+
+    public void StoreScore(int score)
+    {
+        _currencyManager.AddCurrency(score);
     }
 }
